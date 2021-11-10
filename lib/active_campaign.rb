@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
 require "dry-configurable"
+
 require "faraday"
+require "faraday_middleware"
+
 require "active_model"
 # require "active_support"
 require "active_support/inflector"
 
-require_relative "active_campaign/version"
+require "active_campaign/version"
+require "active_campaign/api_errors"
+require "active_campaign/api_connection"
 
 module ActiveCampaign # :nodoc:
   extend Dry::Configurable
-
-  class Error < StandardError; end
 
   RESOURCE_MODELS = Dir[File.expand_path("active_campaign/models/**/*.rb", File.dirname(__FILE__))].freeze
 

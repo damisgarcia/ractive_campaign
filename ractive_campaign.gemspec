@@ -32,4 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activesupport", "~> 6.1.4"
   spec.add_dependency "dry-configurable", "~> 0.7.0"
   spec.add_dependency "faraday", "~> 1.8.0"
+  spec.add_dependency "faraday_middleware", "~> 1.2.0"
+
+  spec.add_dependency "oj",             ">= 3.0", "< 4.0"
 end
