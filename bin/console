@@ -2,14 +2,22 @@
 # frozen_string_literal: true
 
 require "bundler/setup"
-require "ractive_campaign"
+require "dotenv/load"
+require "active_campaign"
+require "httplog"
+require "json"
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
-# (If you use this, don't forget to add pry to your Gemfile!)
-# require "pry"
-# Pry.start
+ActiveCampaign.configure do |config|
+  config.api_url = ENV["AC_API_URL"]
+  config.api_key = ENV["AC_API_KEY"]
+end
 
-require "irb"
-IRB.start(__FILE__)
+HttpLog.configure do |config|
+  config.log_headers = true
+end
+
+require "pry"
+Pry.start

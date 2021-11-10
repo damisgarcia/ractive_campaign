@@ -28,6 +28,8 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "activemodel", "~> 6.1.4"
+  spec.add_dependency "activesupport", "~> 6.1.4"
   spec.add_dependency "dry-configurable", "~> 0.7.0"
   spec.add_dependency "faraday", "~> 1.8.0"
 end

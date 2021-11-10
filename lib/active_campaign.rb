@@ -2,6 +2,9 @@
 
 require "dry-configurable"
 require "faraday"
+require "active_model"
+# require "active_support"
+require "active_support/inflector"
 
 require_relative "active_campaign/version"
 

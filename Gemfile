@@ -2,11 +2,20 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in ractive_campaign.gemspec
+# Specify your gem's dependencies in vindi.gemspec
 gemspec
 
 gem "rake", "~> 13.0"
 
-gem "rspec", "~> 3.0"
+group :development do
+  gem "dotenv"
+  gem "httplog"
+  gem "pry-byebug"
+  gem "rubocop"
+end
 
-gem "rubocop", "~> 1.21"
+group :test do
+  gem "rspec"
+  gem "vcr"
+  gem "webmock"
+end
