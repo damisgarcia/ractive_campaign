@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "lib/ractive_campaign/version"
+require_relative "lib/active_campaign/version"
 
 Gem::Specification.new do |spec|
   spec.name = "ractive_campaign"
-  spec.version = RactiveCampaign::VERSION
+  spec.version = ActiveCampaign::VERSION
   spec.authors = ["Wedson Lima"]
   spec.email = ["wedson.sousa.lima@gmail.com"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
-  spec.homepage = "TODO: Put your gem's website or public repo URL here."
+  spec.summary = "Active Campaign - API v3"
+  spec.description = "Active Campaign - API v3"
+  spec.homepage = "https://github.com/wedsonlima/ractive_campaign"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
@@ -29,7 +29,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "dry-configurable", "~> 0.7.0"
-  spec.add_dependency "faraday", "~> 1.4"
-  spec.add_dependency "faraday_middleware", "~> 1.0"
-  spec.add_dependency "her", "~> 1.1"
+  spec.add_dependency "faraday", "~> 1.8.0"
 end
