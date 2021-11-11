@@ -2,38 +2,24 @@
 
 module ActiveCampaign
   class Tag < Model # :nodoc:
-    ATTRS = %i[
-      id
+    ATTRS = (%i[
       tagType
       tag
       description
       subscriber_count
-      cdate
-      created_timestamp
-      updated_timestamp
-      created_by
-      updated_by
-      links
-    ].freeze
+    ] + DEFAULT_ATTRS).freeze
 
     attr_accessor(*ATTRS)
 
     class << self
-      def all
-        get endpoint
-      end
-
-      def find_by(name:)
-        result = get "#{endpoint}?tags[tag]=#{name}"
+      def find_by(tag:)
+        # result = get "#{endpoint}?tags[tag]=#{tag}"
+        result = find({ tags: { tag: tag } }.to_query)
 
         data = result[:data][root_elements]
         data = data.is_a?(Array) ? data.first : data
 
         set_attributes ATTRS, data
-      end
-
-      def find(id)
-        get "#{endpoint}/#{id}"
       end
     end
 
