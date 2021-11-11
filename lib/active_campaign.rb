@@ -10,8 +10,10 @@ require "active_model"
 require "active_support/inflector"
 
 require "active_campaign/version"
+require "active_campaign/parser"
 require "active_campaign/api_errors"
-require "active_campaign/api_connection"
+require "active_campaign/api"
+require "active_campaign/api_http"
 
 module ActiveCampaign # :nodoc:
   extend Dry::Configurable

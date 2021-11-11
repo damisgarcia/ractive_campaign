@@ -8,23 +8,24 @@ module ActiveCampaign
 
     class << self
       def find_by(email:)
-        get "contacts?email=#{email}"
+        get "#{endpoint}?email=#{email}"
       end
     end
 
     # @example Create a contact
     #
-    #   ActiveCampaign::Contact.create first_name: "Fulano", last_name: "Sicrano", email: "foodlover@mail.com"
+    #   c = ActiveCampaign::Contact.new first_name: "Fulano", last_name: "Sicrano", email: "foodlover@mail.com"
+    #   c.create
     #
     def create
-      self.class.post "contacts", {
+      self.class.post endpoint, {
         contact: {
           email: email,
           firstName: first_name,
           lastName: last_name,
           phone: phone
         }
-      }.stringify_keys
+      }
     end
   end
 end
