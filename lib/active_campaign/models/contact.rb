@@ -2,13 +2,21 @@
 
 module ActiveCampaign
   class Contact < Model # :nodoc:
-    attr_accessor :email, :first_name, :last_name, :phone
+    attr_accessor :id, :email, :first_name, :last_name, :phone
 
     validates :email, :first_name, :last_name, presence: true
 
     class << self
       def find_by(email:)
-        get "#{endpoint}?email=#{email}"
+        r = get "#{endpoint}?email=#{CGI.escape(email)}"
+        r = r[:data][:contacts].first
+
+        new(
+          id: r[:id],
+          email: r[:email],
+          first_name: r[:firstName],
+          last_name: r[:lastName]
+        )
       end
     end
 
@@ -26,6 +34,31 @@ module ActiveCampaign
           phone: phone
         }
       }
+    end
+
+    # @example Update a contact
+    #
+    #   c = ActiveCampaign::Contact.find(1)
+    #   c.last_name = "Fulano"
+    #   c.save
+    #
+    def save
+      self.class.put "#{endpoint}/#{id}", {
+        contact: {
+          email: email,
+          firstName: first_name,
+          lastName: last_name,
+          phone: phone
+        }
+      }
+    end
+
+    # @example Delete a contact
+    #
+    #   ActiveCampaign::Contact.new(id: id).destroy
+    #
+    def destroy
+      self.class.delete "#{endpoint}/#{id}"
     end
   end
 end

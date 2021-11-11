@@ -15,14 +15,12 @@ module ActiveCampaign
     def setup(opts={})
       @connection = Faraday.new(::ActiveCampaign.config.api_url) do |f|
         f.request :json
-
         f.response :json, content_type: "application/json"
-        # f.response :logger
-        # f.response :raise_error
-
-        f.adapter Faraday.default_adapter
 
         f.use ::ActiveCampaign::ResponseParser
+        f.use Faraday::Request::UrlEncoded
+
+        f.adapter Faraday.default_adapter
       end
 
       @connection.headers["Api-Token"] = ::ActiveCampaign.config.api_key
