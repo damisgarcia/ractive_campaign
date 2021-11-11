@@ -15,7 +15,17 @@ module ActiveCampaign
       end
 
       def root_element
-        name.demodulize.underscore
+        name.demodulize.underscore.to_sym
+      end
+
+      def root_elements
+        root_element.to_s.pluralize.to_sym
+      end
+
+      def set_attributes(attrs, data)
+        return new({}) unless data
+
+        new(attrs.map { |attr| [attr, data[attr]] }.to_h)
       end
 
       def create(**args)
