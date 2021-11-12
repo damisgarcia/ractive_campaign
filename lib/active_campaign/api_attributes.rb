@@ -4,6 +4,8 @@ module ActiveCampaign
   module Attributes # :nodoc:
     extend ActiveSupport::Concern
 
+    attr_accessor :all_attrs
+
     DEFAULT_ATTRS = %i[
       id
       cdate
@@ -14,19 +16,44 @@ module ActiveCampaign
       created_by
       updated_by
       links
-      _meta
-      _errors
     ].freeze
 
-    attr_accessor(*DEFAULT_ATTRS)
+    def only_changes_to_params
+      return nil unless changed?
+
+      root, root_params = to_params.first
+
+      {
+        root => root_params.slice(*changed)
+      }
+    end
 
     def to_params
+      iv = instance_variables - DEFAULT_ATTRS.map { |da| :"@#{da}" } - %i[@mutations_from_database @mutations_before_last_save]
+
       {
-        self.class.root_element => instance_variables.map { |v| [v.to_s.delete("@"), instance_variable_get(v)] }.to_h
+        self.class.root_element => iv.map { |v| [v.to_s.delete("@"), instance_variable_get(v)] }.to_h
       }
     end
 
     module ClassMethods # :nodoc:
+      def define_attributes(*attrs)
+        attrs.each do |attr|
+          define_attribute_methods attr
+
+          class_eval <<-RUBY, __FILE__, __LINE__ + 1
+            def #{attr}
+              @#{attr}
+            end
+
+            def #{attr}=(val)
+              #{attr}_will_change! unless val == @#{attr}
+              @#{attr} = val
+            end
+          RUBY
+        end
+      end
+
       def new_records(data)
         instantiate_records self, data
       end
@@ -36,7 +63,9 @@ module ActiveCampaign
       end
 
       def instantiate_record(klass, data)
-        klass.new data
+        record = klass.new data
+        record.clear_changes_information
+        record
       end
 
       def instantiate_records(klass, records_data)
@@ -56,6 +85,15 @@ module ActiveCampaign
       def root_elements
         root_element.to_s.pluralize.to_sym
       end
+    end
+
+    # def reload!
+    #   # get the values from the persistence layer
+    #   clear_changes_information
+    # end
+
+    def rollback!
+      restore_attributes
     end
   end
 end

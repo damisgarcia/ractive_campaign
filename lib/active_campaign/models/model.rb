@@ -3,8 +3,12 @@
 module ActiveCampaign
   class Model # :nodoc:
     include ActiveModel::Model
+    include ActiveModel::Dirty
+
     include ActiveCampaign::ApiHttp
     include ActiveCampaign::Attributes
+
+    define_attributes(*DEFAULT_ATTRS)
 
     class << self
       def all
@@ -39,11 +43,21 @@ module ActiveCampaign
     end
 
     def update
-      self.class.put "#{self.class.endpoint}/#{id}", to_params
+      return nil unless changed?
+
+      result = self.class.put "#{self.class.endpoint}/#{id}", only_changes_to_params
+
+      changes_applied
+
+      result
     end
 
     def create
-      self.class.post self.class.endpoint, to_params
+      result = self.class.post self.class.endpoint, to_params
+
+      changes_applied
+
+      result
     end
 
     def destroy

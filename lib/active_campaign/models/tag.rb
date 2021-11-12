@@ -2,7 +2,7 @@
 
 module ActiveCampaign
   class Tag < Model # :nodoc:
-    attr_accessor :tagType, :tag, :description, :subscriber_count
+    define_attributes :tagType, :tag, :description, :subscriber_count
 
     class << self
       def find_by(tag:)
