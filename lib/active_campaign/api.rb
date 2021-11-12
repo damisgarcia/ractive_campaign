@@ -20,6 +20,7 @@ module ActiveCampaign
       end
 
       @connection.headers["Api-Token"] = ::ActiveCampaign.config.api_key
+      @connection.headers["User-Agent"] = "Ruby ActiveCampaign (ractive_campaign)"
 
       self
     end
