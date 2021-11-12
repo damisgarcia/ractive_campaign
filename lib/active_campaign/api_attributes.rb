@@ -12,9 +12,29 @@ module ActiveCampaign
       created_by
       updated_by
       links
+      _meta
+      _errors
     ].freeze
 
-    class_methods do
+    module ClassMethods # :nodoc:
+      def new_records(data)
+        instantiate_records self, data
+      end
+
+      def new_record(data)
+        instantiate_record self, data
+      end
+
+      def instantiate_record(klass, data)
+        klass.new data
+      end
+
+      def instantiate_records(klass, records_data)
+        records_data.map do |record_data|
+          instantiate_record klass, record_data
+        end
+      end
+
       def endpoint
         name.demodulize.underscore.pluralize
       end
@@ -25,12 +45,6 @@ module ActiveCampaign
 
       def root_elements
         root_element.to_s.pluralize.to_sym
-      end
-
-      def set_attributes(attrs, data)
-        return new({}) unless data
-
-        new(attrs.map { |attr| [attr, data[attr]] }.to_h)
       end
     end
   end

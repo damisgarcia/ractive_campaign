@@ -4,15 +4,11 @@ module ActiveCampaign
   class API # :nodoc:
     attr_reader :connection
 
-    def initialize(*args, &blk)
-      setup(*args, &blk)
+    def initialize
+      setup
     end
 
-    def self.setup(opts = {}, &block)
-      @api = new(opts, &block)
-    end
-
-    def setup(opts={})
+    def setup
       @connection = Faraday.new(::ActiveCampaign.config.api_url) do |f|
         f.request :json
         f.response :json, content_type: "application/json"
@@ -47,7 +43,10 @@ module ActiveCampaign
         end
       end
 
-      { parsed_body: response.env[:parsed_body], _response: response }
+      {
+        parsed_data: response.env[:parsed_data],
+        _response: response
+      }
     end
   end
 end
