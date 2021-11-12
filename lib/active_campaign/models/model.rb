@@ -15,6 +15,10 @@ module ActiveCampaign
         get "#{endpoint}?#{args}"
       end
 
+      def find_by(args = {})
+        filter(args.to_query).last
+      end
+
       def find(id)
         get "#{endpoint}/#{id}"
       end

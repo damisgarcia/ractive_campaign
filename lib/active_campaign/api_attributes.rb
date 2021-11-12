@@ -9,12 +9,22 @@ module ActiveCampaign
       cdate
       created_timestamp
       updated_timestamp
+      created_utc_timestamp
+      updated_utc_timestamp
       created_by
       updated_by
       links
       _meta
       _errors
     ].freeze
+
+    attr_accessor(*DEFAULT_ATTRS)
+
+    def to_params
+      {
+        self.class.root_element => instance_variables.map { |v| [v.to_s.delete("@"), instance_variable_get(v)] }.to_h
+      }
+    end
 
     module ClassMethods # :nodoc:
       def new_records(data)
