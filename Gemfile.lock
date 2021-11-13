@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ractive_campaign (0.0.1)
+    ractive_campaign (0.1.0)
       activemodel (~> 6.1.4)
       activesupport (~> 6.1.4)
       dry-configurable (~> 0.7.0)
