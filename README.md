@@ -7,7 +7,7 @@ Simple wrapper for ActiveCampaign API v3
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'ractive_campaign'
+gem "ractive_campaign"
 ```
 
 And then execute:
@@ -37,11 +37,15 @@ end
 
 ```ruby
 # new
-harry = ActiveCampaign::Contact.new firstName: "Harry", lastName: "Potter", email: "potter.hurray@hogwash.com"
+harry = ActiveCampaign::Contact.new firstName: "Harry",
+                                    lastName: "Potter",
+                                    email: "potter.hurray@hogwash.com"
 harry.save
 
 # create
-hermione = ActiveCampaign::Contact.new firstName: "Hermione", lastName: "Granger", email: "mione@drtooth.com"
+hermione = ActiveCampaign::Contact.new firstName: "Hermione",
+                                       lastName: "Granger",
+                                       email: "mione@drtooth.com"
 
 # update
 ron = ActiveCampaign::Contact.create email: "ron1988@hogwash.com", lastName: "Weasley"
@@ -52,7 +56,7 @@ ron.save
 #### Tag
 
 ```ruby
-ActiveCampaign::Contact.create tag: "hogwarts"
+ActiveCampaign::Tag.create tag: "hogwarts"
 ```
 
 #### Contact tags

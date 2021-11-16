@@ -4,8 +4,8 @@ module ActiveCampaign
   #
   # @example ContactTags
   #
-  #   contact = ActiveCampaign::Contact.find(email: "contact-email@mail.com")
-  #   tag = ActiveCampaign::Tag.find_by(tag: "tag-name")
+  #   contact = ActiveCampaign::Contact.find(1)
+  #   tag = ActiveCampaign::Tag.find(1)
   #
   #   ActiveCampaing::ContactTag.create contact: contact, tag: tag
   #
