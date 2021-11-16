@@ -4,18 +4,6 @@ module ActiveCampaign
   module Attributes # :nodoc:
     extend ActiveSupport::Concern
 
-    DEFAULT_ATTRS = %i[
-      id
-      cdate
-      created_timestamp
-      updated_timestamp
-      created_utc_timestamp
-      updated_utc_timestamp
-      created_by
-      updated_by
-      links
-    ].freeze
-
     def only_changes_to_params
       return nil unless changed?
 
@@ -27,7 +15,7 @@ module ActiveCampaign
     end
 
     def to_params
-      iv = instance_variables - DEFAULT_ATTRS.map { |da| :"@#{da}" } - %i[@mutations_from_database @mutations_before_last_save]
+      iv = instance_variables - %i[@mutations_from_database @mutations_before_last_save]
 
       {
         self.class.root_element => iv.map { |v| [v.to_s.delete("@"), instance_variable_get(v)] }.to_h
@@ -76,11 +64,11 @@ module ActiveCampaign
       end
 
       def endpoint
-        name.demodulize.underscore.pluralize
+        name.demodulize.camelize(:lower).pluralize
       end
 
       def root_element
-        name.demodulize.underscore.to_sym
+        name.demodulize.camelize(:lower).to_sym
       end
 
       def root_elements

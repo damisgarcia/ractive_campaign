@@ -1,16 +1,39 @@
 # frozen_string_literal: true
 
 module ActiveCampaign
-  class ContactTag < Model # :nodoc:
+  #
+  # @example ContactTags
+  #
+  #   contact = ActiveCampaign::Contact.find(email: "contact-email@mail.com")
+  #   tag = ActiveCampaign::Tag.find_by(tag: "tag-name")
+  #
+  #   ActiveCampaing::ContactTag.create contact: contact, tag: tag
+  #
+  class ContactTag < Model
     define_attributes :contact, :tag
 
-    class << self
-      def endpoint
-        "contactTags"
-      end
+    def create
+      self.tag = extract_id_from_tag(tag)
+      self.contact = extract_id_from_contact(contact)
 
-      def root_element
-        "contactTag"
+      super
+    end
+
+    private
+
+    def extract_id_from_tag(tag)
+      case tag
+      when ::ActiveCampaign::Tag then tag.id
+      else
+        tag
+      end
+    end
+
+    def extract_id_from_contact(contact)
+      case contact
+      when ::ActiveCampaign::Contact then contact.id
+      else
+        contact
       end
     end
   end
