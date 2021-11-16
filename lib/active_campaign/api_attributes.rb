@@ -4,8 +4,6 @@ module ActiveCampaign
   module Attributes # :nodoc:
     extend ActiveSupport::Concern
 
-    attr_accessor :all_attrs
-
     DEFAULT_ATTRS = %i[
       id
       cdate
@@ -39,6 +37,7 @@ module ActiveCampaign
     module ClassMethods # :nodoc:
       def define_attributes(*attrs)
         attrs.each do |attr|
+          # ActiveModel's define_attribute_methods
           define_attribute_methods attr
 
           class_eval <<-RUBY, __FILE__, __LINE__ + 1
@@ -63,6 +62,8 @@ module ActiveCampaign
       end
 
       def instantiate_record(klass, data)
+        define_attributes(*data.keys)
+
         record = klass.new data
         record.clear_changes_information
         record

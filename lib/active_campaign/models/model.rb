@@ -8,8 +8,6 @@ module ActiveCampaign
     include ActiveCampaign::ApiHttp
     include ActiveCampaign::Attributes
 
-    define_attributes(*DEFAULT_ATTRS)
-
     class << self
       def all
         get endpoint
@@ -37,7 +35,7 @@ module ActiveCampaign
     end
 
     def save
-      return update if id.present?
+      return update if defined?(id) && id.present?
 
       create
     end

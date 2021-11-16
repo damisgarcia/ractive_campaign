@@ -2,6 +2,16 @@
 
 module ActiveCampaign
   class ContactTag < Model # :nodoc:
-    define_attributes :tag_id, :contact_id
+    define_attributes :contact, :tag
+
+    class << self
+      def endpoint
+        "contactTags"
+      end
+
+      def root_element
+        "contactTag"
+      end
+    end
   end
 end
