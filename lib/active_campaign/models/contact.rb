@@ -26,12 +26,24 @@ module ActiveCampaign
 
     # @example Apply a tag to a contact.
     #
-    #   ActiveCampaign::Contact.find(1).apply_tag "tag-name"
+    #   ActiveCampaign::Contact.find(1).add_tag "tag-name"
     #
-    def apply_tag(tag)
+    def add_tag(tag)
       tag_id = Tag.find_by(tag: tag)&.id
 
       ActiveCampaign::ContactTag.create contact: id, tag: tag_id if tag_id
+    end
+
+    # @example Remove a tag from a contact.
+    #
+    #   ActiveCampaign::Contact.find(1).remove_tag "tag-name"
+    #
+    def remove_tag(tag)
+      tag_id = Tag.find_by(tag: tag)&.id
+
+      contact_tag = contact_tags.filter_map { |ct| ct if ct.tag == tag_id }.last
+
+      contact_tag&.destroy
     end
   end
 end
