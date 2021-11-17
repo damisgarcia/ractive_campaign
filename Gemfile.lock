@@ -3,7 +3,7 @@ PATH
   specs:
     ractive_campaign (0.1.1)
       activemodel (~> 6.1.4)
-      dry-configurable (~> 0.7.0)
+      dry-configurable (~> 0.12.1)
       faraday (~> 1.8.0)
       faraday_middleware (~> 1.2.0)
 
@@ -28,7 +28,10 @@ GEM
       rexml
     diff-lcs (1.4.4)
     dotenv (2.7.6)
-    dry-configurable (0.7.0)
+    dry-configurable (0.12.1)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.5, >= 0.5.0)
+    dry-core (0.7.1)
       concurrent-ruby (~> 1.0)
     faraday (1.8.0)
       faraday-em_http (~> 1.0)
@@ -88,7 +91,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.3)
-    rubocop (1.22.3)
+    rubocop (1.23.0)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
