@@ -7,7 +7,7 @@ Simple wrapper for ActiveCampaign API v3
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "ractive_campaign"
+gem "ractive_campaign", require: "active_campaign"
 ```
 
 And then execute:
