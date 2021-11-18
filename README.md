@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/ractive_campaign.svg)](https://badge.fury.io/rb/ractive_campaign) [![Maintainability](https://api.codeclimate.com/v1/badges/c23221fc334b63af9a07/maintainability)](https://codeclimate.com/github/wedsonlima/ractive_campaign/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/c23221fc334b63af9a07/test_coverage)](https://codeclimate.com/github/wedsonlima/ractive_campaign/test_coverage)
+
 # RactiveCampaign
 
 Simple wrapper for ActiveCampaign API v3
