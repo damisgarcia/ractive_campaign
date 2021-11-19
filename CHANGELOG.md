@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.1.5] - 2021-11-19
+### Changed
+
+- when adding a tag to a contact, create it if it doesn't exist
+
 ## [0.1.4] - 2021-11-19
 ### Changed
 
