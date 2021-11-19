@@ -24,14 +24,22 @@ module ActiveCampaign
       ContactTag.get "#{self.class.endpoint}/#{id}/contactTags"
     end
 
-    # @example Apply a tag to a contact.
+    # @example Add a tag to a contact.
     #
     #   ActiveCampaign::Contact.find(1).add_tag "tag-name"
     #
-    def add_tag(tag)
+    # Don't create the tag if it doesn't exist.
+    #
+    #   ActiveCampaign::Contact.find(1).add_tag "tag-name", create_if_not_found: false
+    #
+    def add_tag(tag, create_if_not_found: true)
       tag_id = Tag.find_by(tag: tag)&.id
 
-      ActiveCampaign::ContactTag.create contact: id, tag: tag_id if tag_id
+      tag_id = ActiveCampaign::Tag.create(tag: tag)&.id if !tag_id && create_if_not_found
+
+      return false unless tag_id
+
+      ActiveCampaign::ContactTag.create contact: id, tag: tag_id
     end
 
     # @example Remove a tag from a contact.
@@ -40,6 +48,8 @@ module ActiveCampaign
     #
     def remove_tag(tag)
       tag_id = Tag.find_by(tag: tag)&.id
+
+      return false unless tag_id
 
       contact_tag = contact_tags.filter_map { |ct| ct if ct.tag == tag_id }.last
 
