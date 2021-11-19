@@ -24,7 +24,7 @@ module ActiveCampaign
       end
 
       def find(id)
-        get "#{endpoint}/#{id}", { _root: root_element }
+        get "#{endpoint}/#{id}"
       end
 
       def save(**args)

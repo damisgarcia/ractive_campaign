@@ -2,7 +2,7 @@
 
 # RactiveCampaign
 
-Simple wrapper for ActiveCampaign API v3
+Ruby API wrapper for ActiveCampaign API v3
 
 ## Installation
 
