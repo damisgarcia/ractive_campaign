@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [0.1.4] - 2021-11-19
+### Changed
+
+- loading endpoint result into the correct model class
+- README section on `install and require`
+
 ## [0.1.3] - 2021-11-18
 ### Added
 
