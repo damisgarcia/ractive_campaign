@@ -33,9 +33,9 @@ module ActiveCampaign
     #   ActiveCampaign::Contact.find(1).add_tag "tag-name", create_if_not_found: false
     #
     def add_tag(tag, create_if_not_found: true)
-      tag_id = Tag.find_by(tag: tag)&.id
+      tag_id = Tag.find_by(tag:)&.id
 
-      tag_id = ActiveCampaign::Tag.create(tag: tag)&.id if !tag_id && create_if_not_found
+      tag_id = ActiveCampaign::Tag.create(tag:)&.id if !tag_id && create_if_not_found
 
       return false unless tag_id
 
@@ -47,7 +47,7 @@ module ActiveCampaign
     #   ActiveCampaign::Contact.find(1).remove_tag "tag-name"
     #
     def remove_tag(tag)
-      tag_id = Tag.find_by(tag: tag)&.id
+      tag_id = Tag.find_by(tag:)&.id
 
       return false unless tag_id
 

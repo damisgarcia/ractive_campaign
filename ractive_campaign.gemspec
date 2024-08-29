@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "activemodel", "~> 6.1.4"
+  spec.add_dependency "activemodel", "~> 7.1"
   spec.add_dependency "dry-configurable", "~> 0.12.1"
   spec.add_dependency "faraday", "~> 1.8.0"
   spec.add_dependency "faraday_middleware", "~> 1.2.0"

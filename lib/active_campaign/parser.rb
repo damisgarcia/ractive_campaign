@@ -12,11 +12,11 @@ module ActiveCampaign
       status_code   = env[:status]
 
       env[:parsed_data] = {
-        status_code: status_code,
+        status_code:,
         data: parsed_data,
-        errors: errors,
+        errors:,
         meta: metadata,
-        score_values: score_values
+        score_values:
       }
     end
   end
