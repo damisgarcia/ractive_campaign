@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.1.6] - 2024-080-29
+### Changed
+
+- update ruby version to 2.7
+
 ## [0.1.5] - 2021-11-19
 ### Changed
 

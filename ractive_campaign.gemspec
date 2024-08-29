@@ -12,13 +12,13 @@ Gem::Specification.new do |spec|
   spec.description = "Ruby API wrapper for ActiveCampaign API v3"
   spec.homepage = "https://github.com/wedsonlima/ractive_campaign"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 2.7.8"
 
   spec.metadata = {
-    "homepage_uri"      => spec.homepage,
-    "source_code_uri"   => "https://github.com/wedsonlima/ractive_campaign",
-    "changelog_uri"     => "https://github.com/wedsonlima/ractive_campaign/blob/main/CHANGELOG.md",
-    "documentation_uri" => "https://www.rubydoc.info/gems/ractive_campaign/#{ActiveCampaign::VERSION}",
+    "homepage_uri" => spec.homepage,
+    "source_code_uri" => "https://github.com/wedsonlima/ractive_campaign",
+    "changelog_uri" => "https://github.com/wedsonlima/ractive_campaign/blob/main/CHANGELOG.md",
+    "documentation_uri" => "https://www.rubydoc.info/gems/ractive_campaign/#{ActiveCampaign::VERSION}"
   }
 
   # Specify which files should be added to the gem when it is released.
